@@ -1,0 +1,5 @@
+project_id: "dogwood-thought-485706-p5"
+bucket: "yt-raw-comments-dogwood-thought-485706-p5"
+pubsub_topic: "yt-comments-topic"
+bq_dataset: "youtube_comments"
+bq_table: "comments"

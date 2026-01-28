@@ -1,0 +1,4 @@
+project_id: "dogwood-thought-485706-p5"
+region: "us-central1"
+cf_sa_email: "cloud-fn-sa@dogwood-thought-485706-p5.iam.gserviceaccount.com"
+bucket: "yt-raw-comments-485706-p5"
