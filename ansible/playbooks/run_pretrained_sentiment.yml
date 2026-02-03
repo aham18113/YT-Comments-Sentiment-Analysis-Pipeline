@@ -1,10 +1,17 @@
 - hosts: localhost
+  vars:
+    # Define the path to your venv for easy reuse
+    venv_path: "/opt/jenkins-venv"
+  
   tasks:
-    - name: Install Python dependencies
+    - name: Install Python dependencies into venv
       pip:
         name:
           - google-cloud-language
           - google-cloud-bigquery
+        # This tells Ansible to use the venv's pip
+        virtualenv: "{{ venv_path }}"
 
-    - name: Run pretrained sentiment analysis
-      command: python3 ../../ml/pretrained_sentiment.py
+    - name: Run pretrained sentiment analysis using venv python
+      # Point directly to the python binary inside the venv
+      command: "{{ venv_path }}/bin/python3 ../../ml/pretrained_sentiment.py"
