@@ -1,10 +1,9 @@
 - hosts: localhost
-  become: false
   vars:
-    venv_path: "/home/{{ ansible_user_id }}/jenkins-env"
+    venv_path: "/opt/jenkins-venv"
   
   tasks:
-    - name: Install Python dependencies into venv
+    - name: Install Python dependencies into the shared venv
       pip:
         name:
           - google-cloud-language
