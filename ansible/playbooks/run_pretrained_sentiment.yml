@@ -1,15 +1,24 @@
 - hosts: localhost
-  vars:
-    venv_path: "/opt/jenkins-venv"
-  
   tasks:
+    - name: Ensure the venv directory exists
+      file:
+        path: "/opt/jenkins-venv"
+        state: directory
+        mode: '0755'
+      # This task might still need 'become: true' if the folder doesn't exist yet
+      become: true
+
+    - name: Ensure current user owns the venv directory
+      file:
+        path: "/opt/jenkins-venv"
+        owner: "{{ ansible_user_id }}"
+        recurse: yes
+      become: true
+
     - name: Install Python dependencies into the shared venv
       pip:
         name:
           - google-cloud-language
           - google-cloud-bigquery
-        virtualenv: "{{ venv_path }}"
+        virtualenv: "/opt/jenkins-venv"
         virtualenv_command: python3 -m venv
-
-    - name: Run pretrained sentiment analysis
-      command: "{{ venv_path }}/bin/python3 ../../ml/pretrained_sentiment.py"
